@@ -1,0 +1,85 @@
+<section class="add-subreddit-post container">
+  <div class="add-subreddit-post__wrapper">
+    <div class="add-subreddit-post__title-wrapper">
+      <h3 class="add-subreddit-post__title">
+        Help users with creating new
+        <span class="add-subreddit-post__txt-spec">subreddit</span>
+      </h3>
+    </div>
+    <div class="add-subreddit-post__desc-wrapper">
+      <h5 class="add-subreddit-post__desc-title">Add Community</h5>
+      <p class="add-subreddit-post__desc">
+        By submiting you are agreed with
+        <span class="add-subreddit-post__txt-wrapper"
+          ><a
+            class="add-subreddit-post__txt-spec"
+            href="https://www.redditinc.com/policies/user-agreement"
+            target="blank"
+            >terms</a
+          ></span
+        >
+        and
+        <span class="add-subreddit-post__txt-wrapper"
+          ><a
+            class="add-subreddit-post__txt-spec"
+            href="https://www.redditinc.com/policies/privacy-policy"
+            target="blank"
+            >policy.</a
+          ></span
+        >
+      </p>
+    </div>
+    <form ngNativeValidate [formGroup]="subredditForm" (ngSubmit)="saveData()">
+      <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">Name</p>
+        <p class="add-subreddit-post__desc">
+          Community names including capitalization cannot be changed.
+        </p>
+        <input
+          class="add-subreddit-post__data-name"
+          type="text"
+          required
+          placeholder="Name"
+          formControlName="name"
+          [ngClass]="{
+            'form__error-input': validations.displayErrorMessageCommunityName
+          }"
+          (keyup)="validations.showErrorCommunityName($event.target)"
+        />
+        <p
+        *ngIf="validations.displayErrorMessageCommunityName"
+        class="form__error-text"
+        >
+        {{ validations.communityNameErrorMessage }}
+        </p>
+      </div>
+      <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">Description</p>
+        <p class="add-subreddit-post__desc">
+          Community description helps users to get what they are searching for.
+        </p>
+        <textarea
+          class="add-subreddit-post__data-name"
+          placeholder="Description"
+          required
+          formControlName="description"
+          [ngClass]="{
+            'form__error-input': validations.displayErrorMessageDescription
+          }"
+          (keyup)="validations.showErrorDescription($event.target)"
+        ></textarea>
+        <p
+          *ngIf="validations.displayErrorMessageDescription"
+          class="form__error-text"
+         >
+          {{ validations.descriptionErrorMessage }}
+        </p>
+        <input
+          value="Create Community"
+          class="add-subreddit-post__data-btn"
+          type="submit"
+        />
+      </div>
+    </form>
+  </div>
+</section>

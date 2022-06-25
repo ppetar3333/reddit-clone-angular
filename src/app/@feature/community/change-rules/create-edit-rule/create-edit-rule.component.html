@@ -1,0 +1,17 @@
+<mat-dialog-content>
+    <div class="modal-header">
+        <h4 #title>Add New Rule</h4>
+        <mat-icon [mat-dialog-close]="true">close</mat-icon>
+    </div>
+    <form class="create-club" [formGroup]="formGroup">
+        <mat-form-field appearance="fill">
+            <mat-label>Rule</mat-label>
+            <input formControlName="rule" matInput required>
+        </mat-form-field>
+        <div class="create-club__actions">
+            <button class="mat-raised-button mat-primary" (click)="createNewRule()" *ngIf="!editMode">Save</button>
+            <button class="mat-raised-button mat-primary" (click)="editExistingRule()" *ngIf="editMode">Edit</button>
+            <button class="mat-raised-button" [mat-dialog-close]="true">Close</button>
+        </div>
+    </form>
+</mat-dialog-content>

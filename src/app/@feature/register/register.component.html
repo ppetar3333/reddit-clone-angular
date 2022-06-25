@@ -1,0 +1,129 @@
+<section class="form">
+  <div class="form__wrapper container">
+    <form
+      ngNativeValidate
+      class="form__form"
+      [formGroup]="registerForm"
+      action="post"
+      (ngSubmit)="register()"
+    >
+      <div class="form__image-wrapper">
+        <img
+          class="form__image"
+          src="../../assets/images/form-img.png"
+          alt="form Background"
+        />
+      </div>
+      <div class="form__content-wrapper">
+        <div class="form__policy-wrapper">
+          <p class="form__policy">Registration</p>
+          <p class="form__policy">
+            By continuing, you agree to our
+            <a
+              class="form__policy-link"
+              href="https://www.redditinc.com/policies/user-agreement"
+              target="blank"
+              >User Agreement</a
+            >
+            and
+            <a
+              class="form__policy-link"
+              href="https://www.redditinc.com/policies/privacy-policy"
+              target="blank"
+              >Privacy Policy</a
+            >.
+          </p>
+        </div>
+        <div class="form__input-wrapper">
+          <input
+            formControlName="username"
+            class="form__input"
+            [ngClass]="{
+              'form__error-input': validations.displayErrorMessageUsername
+            }"
+            placeholder="Username"
+            type="text"
+            #inputUsername
+            (keyup)="validations.showErrorUsername(inputUsername.value)"
+            required
+          />
+          <p
+            *ngIf="validations.displayErrorMessageUsername"
+            class="form__error-text"
+          >
+            {{ validations.usernameErrorMessage }}
+          </p>
+          <p *ngIf="validations.errorUsernameExists" class="form__error-text">
+            {{ validations.usernameExistsMessage }}
+          </p>
+          <input
+            formControlName="password"
+            class="form__input"
+            [ngClass]="{
+              'form__error-input': validations.displayErrorMessagePassword
+            }"
+            placeholder="Passowrd"
+            type="password"
+            #inputPassowrd
+            (keyup)="validations.showErrorPassowrd(inputPassowrd.value)"
+            required
+          />
+          <p
+            *ngIf="validations.displayErrorMessagePassword"
+            class="form__error-text"
+          >
+            {{ validations.passwordErrorMessage }}
+          </p>
+          <input
+            formControlName="repeatPassword"
+            class="form__input"
+            [ngClass]="{
+              'form__error-input': validations.displayErrorMessageRepeatPassword
+            }"
+            placeholder="Repeat Passowrd"
+            type="password"
+            #inputRepeatPassword
+            (keyup)="
+              validations.showErrorRepeatPassowrd(
+                inputRepeatPassword.value,
+                inputPassowrd.value
+              )
+            "
+            required
+          />
+          <p
+            *ngIf="validations.displayErrorMessageRepeatPassword"
+            class="form__error-text"
+          >
+            {{ validations.passwordRepeatErrorMessage }}
+          </p>
+          <input
+            formControlName="email"
+            class="form__input"
+            [ngClass]="{
+              'form__error-input': validations.displayErrorMessageEmail
+            }"
+            placeholder="Email"
+            type="text"
+            #inputEmail
+            (keyup)="validations.showErrorEmail(inputEmail.value)"
+            required
+          />
+          <p
+            *ngIf="validations.displayErrorMessageEmail"
+            class="form__error-text"
+          >
+            {{ validations.emailErrorMessage }}
+          </p>
+          <input class="form__btn" type="submit" value="Submit" />
+          <div class="form__register-wrapper">
+            <p class="form__register-info">
+              Already a member?
+              <a class="form__register-btn" routerLink="/login">LOG IN</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

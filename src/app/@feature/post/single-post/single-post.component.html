@@ -1,0 +1,160 @@
+<section class="post-card single-post container">
+  <div class="post-card__wrapper">
+    <div class="single-post-wrapper">
+      <div class="post-card__left-side">
+        <div class="post-card__vote-wrapper">
+          <app-vote-button [post]="post"></app-vote-button>
+        </div>
+      </div>
+      <div class="post-card__right-side">
+        <div class="post-card__username-wrapper">
+          <div class="post-card__username-left">
+            <span class="post-card__avatar"
+              ><img
+                class="post-card__avatar-img"
+                [src]="post?.user?.avatar"
+                alt="Avatar Image"
+            /></span>
+            <span class="post-card__username" *ngIf="post.user?.displayName">{{ post.user.displayName }} </span>
+            <span class="post-card__username" *ngIf="!post.user?.displayName">{{ post.user.username }}</span>            <span class="post-card__time"
+              >[ Posted {{ post.creationDate | dateAgo }} ]</span
+            >
+            <span class="post-card__time" *ngIf="post.flair"
+              >Flair - {{ post.flair.name }}</span
+            >
+          </div>
+          <div class="post-card__username-right">
+            <span class="post-card__community"
+              ><a
+                class="post-card__community-link btn--blue"
+                [routerLink]="['/community', post.subreddit.subredditID]"
+                >{{ post.subreddit.name }}</a
+              ></span
+            >
+          </div>
+        </div>
+        <div class="post-card__info-wrapper">
+          <h4 class="post-card__title">
+            {{ post.title }}
+          </h4>
+          <span *ngIf="!editMode" class="post-card__desc">{{ post.text }}</span>
+          <textarea class="post-card__desc-edit" #editedDesc (keyup)="getChangedDesc(editedDesc)" *ngIf="editMode" [value]="post.text"></textarea>
+          <span class="post-card__img" *ngIf="post.imagePreview"
+            ><img
+              class="post-card__img-post"
+              [src]="post.imagePreview"
+              alt="Post Image"
+          /></span>
+        </div>
+        <div class="post-card__iteract-wrapper">
+          <div class="post-card__iteract">
+            <span class="post-card__iteract-info">
+              <button
+                (click)="postComponent.showComments(post.postID)"
+                class="post-card__iteract-btn"
+                type="button"
+              >
+                <img
+                  class="post-card__vote-img"
+                  src="../../assets/images/comment.png"
+                  alt="comment image"
+                />
+                Comments
+              </button>
+            </span>
+            <span class="post-card__iteract-info"
+              ><button
+                (click)="postComponent.reportPost(post.postID)"
+                class="post-card__iteract-btn"
+                type="button"
+              >
+                <img
+                  class="post-card__vote-img"
+                  src="../../assets/images/report.png"
+                  alt="Report Image"
+                />
+                Report
+              </button></span
+            >
+          </div>
+
+           <div class="post-card__iteract" *ngIf="loggedInUser?.username === post.user?.username && !editMode">
+            <span class="post-card__iteract-info">
+              <button
+                (click)="enableEdit()"
+                class="post-card__iteract-user-btn"
+                type="button"
+              >
+                Edit
+              </button>
+            </span>
+            <span class="post-card__iteract-info"
+              ><button
+                (click)="deletePost()"
+                class="post-card__iteract-user-btn spec-btn"
+                type="button"
+              >
+                Delete
+              </button></span
+            >
+          </div>
+          <div class="post-card__iteract" *ngIf="loggedInUser?.username === post.user?.username && editMode">
+            <span class="post-card__iteract-info">
+              <button
+                (click)="saveEditedDesc()"
+                class="post-card__iteract-user-btn"
+                type="button"
+              >
+                Save
+              </button>
+            </span>
+            <span class="post-card__iteract-info">
+              <button
+                (click)="cancelEdit()"
+                class="post-card__iteract-user-btn spec-btn"
+                type="button"
+              >
+                Cancel
+              </button>
+            </span>
+          </div>
+        </div>
+        <div
+          class="post-card__leave-comment-wrapper"
+          *ngIf="auth.isLoggedIn$ | async"
+        >
+          <form ngNativeValidate>
+            <textarea
+              class="post-card__leave-comment"
+              placeholder="Leave A Comment"
+              required
+              #commentData
+            ></textarea>
+            <button class="post-card__comment-btn" type="submit" (click)="commentBtn(commentData)">Submit</button>
+          </form>
+        </div>
+        <div class="sort-single-post">
+          <app-sort-post-comment
+            [sortCommentsDropdown]="true"
+            (selectedOptionForComment)="handleSelectedOptionComment($event)"
+          ></app-sort-post-comment>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  <div *ngIf="isLoading" class="loader__wrapper">
+    <div class="loader"></div>
+  </div>
+  <div *ngIf="postComments.length > 0">
+    <div class="comments" *ngFor="let comment of postComments">
+      <app-comments [comment]="comment" [post]="post"></app-comments>
+    </div>
+  </div>
+  <div *ngIf="postComments.length === 0 && !isLoading" class="no-comment-data-wrapper">
+    <div class="no-comment-data">
+      There is no comments provided. Introduce us by telling what you're thinking of.
+      <img src="../../../../assets/images/no-data.png" alt="" class="no-comment-data-img">
+    </div>
+  </div>
+</section>

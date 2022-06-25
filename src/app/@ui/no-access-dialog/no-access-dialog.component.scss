@@ -1,0 +1,27 @@
+@import "../../../scss/abstract/variables";
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  mat-icon {
+    cursor: pointer;
+  }
+
+  h4 {
+    font-weight: bold;
+  }
+}
+
+.mat-raised-button {
+  padding: 5px 30px;
+  background-color: $blue;
+  color: white;
+}
+
+.mat-dialog-actions {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+}

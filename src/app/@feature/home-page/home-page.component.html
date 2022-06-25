@@ -1,0 +1,12 @@
+<section class="home container">
+  <div class="home__wrapper">
+    <p class="home__title">
+      Welcome To <span class="home__title-spec">Reddit</span>
+    </p>
+  </div>
+  <app-sort-post-comment 
+    (selectedOptionForPost)="handleSelectedOptionPost($event)"
+    [sortPostsDropdown]="true">
+  </app-sort-post-comment>
+  <app-post-card [posts]="posts"></app-post-card>
+</section>

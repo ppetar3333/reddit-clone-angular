@@ -1,0 +1,70 @@
+<section class="form">
+  <div class="form__wrapper container">
+    <form
+      ngNativeValidate
+      [formGroup]="formForm"
+      (ngSubmit)="login()"
+      method="post"
+      class="form__form"
+    >
+      <div class="form__image-wrapper">
+        <img
+          class="form__image"
+          src="../../assets/images/form-img.png"
+          alt="form Background"
+        />
+      </div>
+      <div class="form__content-wrapper">
+        <div class="form__policy-wrapper">
+          <p class="form__policy">Login</p>
+          <p class="form__policy">
+            By continuing, you agree to our
+            <a
+              class="form__policy-link"
+              href="https://www.redditinc.com/policies/user-agreement"
+              target="blank"
+              >User Agreement</a
+            >
+            and
+            <a
+              class="form__policy-link"
+              href="https://www.redditinc.com/policies/privacy-policy"
+              target="blank"
+              >Privacy Policy</a
+            >.
+          </p>
+        </div>
+        <div class="form__input-wrapper">
+          <input
+            formControlName="username"
+            type="text"
+            name="username"
+            id="username"
+            required
+            class="form__input"
+            placeholder="Username"
+          />
+          <input
+            formControlName="password"
+            type="password"
+            name="password"
+            id="password"
+            required
+            placeholder="Passowrd"
+            class="form__input"
+          />
+          <input class="form__btn" type="submit" value="Submit" />
+          <div class="form__register-wrapper">
+            <p class="form__register-info">
+              New to Reddit?
+              <a class="form__register-btn" routerLink="/register">SIGN UP</a>
+            </p>
+          </div>
+          <div *ngIf="error" class="form__error">
+            <p>{{ errorMessage }}</p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

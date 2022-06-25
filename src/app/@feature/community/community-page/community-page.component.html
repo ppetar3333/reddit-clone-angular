@@ -1,0 +1,69 @@
+<section class="subreddit container">
+  <div class="subreddit__wrapper">
+    <p class="subreddit-text">
+      This Is
+      <span class="subreddit-name">{{ currentSubreddit?.name }}</span>
+      Subreddit
+    </p>
+    <p class="subreddit-desc" *ngIf="!editMode">
+      {{ currentSubreddit?.description }}
+    </p>
+    <textarea class="post-card__desc-edit subreddit-edit-desc" #editedDesc (keyup)="getChangedDesc(editedDesc)" *ngIf="editMode" [value]="currentSubreddit.description"></textarea>
+    <div class="subreddit__suspend-wrapper" *ngIf="subredditAdmin">
+      <button class="subreddit__susprend-btn btn--blue" type="button" (click)="suspendCommunity()">
+        Suspend Community
+      </button>
+    </div>
+    <div class="subreddit-details__wrapper">
+      <div class="subreddit-details">
+        <h4 class="subreddit-details-title">Rules</h4>
+        <div *ngIf="currentSubreddit">
+          <p
+          *ngFor="let data of currentSubreddit?.rules; let i = index"
+          class="subreddit-details-data"
+        >
+          <b>{{ i + 1 + ". " }}</b> {{ data }}
+        </p>
+        <button 
+          *ngIf="subredditModerator" 
+          class="subreddit-details__btn-change" 
+          [routerLink]="['/change-rules', currentSubreddit?.subredditID]">
+            Change
+        </button>
+        </div>
+      </div>
+      <div class="subreddit-details">
+        <h4 class="subreddit-details-title">Flairs</h4>
+        <div *ngIf="subredditFlairs.length > 0">
+          <p
+          *ngFor="let data of subredditFlairs; let i = index"
+          class="subreddit-details-data"
+        >
+          <b>{{ i + 1 + ". " }}</b> {{ data }}
+        </p>
+        </div>
+        <div *ngIf="subredditFlairs.length === 0">
+          <p class="subreddit-details-data">
+            No Flairs Provided
+          </p>
+        </div>
+        <button 
+        *ngIf="subredditModerator" 
+        class="subreddit-details__btn-change" 
+        [routerLink]="['/change-flairs', currentSubreddit?.subredditID]">
+          Change
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="subredditModerator">
+    <button *ngIf="!editMode" class="change-subreddit" (click)="enableEdit()">Change Subreddit</button>
+    <button *ngIf="editMode" class="change-subreddit" (click)="saveEditedDesc()">Save</button>
+    <button *ngIf="editMode" class="change-subreddit spec-btn" (click)="cancelEdit()">Cancel</button>
+  </div>
+  <app-sort-post-comment
+    [sortPostsDropdown]="true"
+    (selectedOptionForPost)="handleSelectedOptionPost($event)"> 
+  </app-sort-post-comment>
+  <app-post-card [posts]="posts"></app-post-card>
+</section>

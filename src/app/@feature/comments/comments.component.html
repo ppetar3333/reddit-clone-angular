@@ -1,0 +1,151 @@
+<div class="comments__wrapper">
+  <div class="comments__content">
+    <div class="post-card__report-wrapper comments__report-title remove-margin" *ngIf="reported">
+      <p class="post-card__report">Report Reason: {{ reportedReason }}</p>
+    </div>
+    <div class="" [ngClass]="{'reported' : reported}">
+      <div class="comments__user">
+        <div class="post-card__username-left right-side">
+          <div class="flex">
+            <div class="comments__avatar-wrapper">
+              <img
+                class="post-card__avatar-img comments__avatar"
+                src="{{ post.user.avatar }}"
+                alt="User Avatar"
+              />
+            </div>
+            <div class="post-card__username" style="margin-top: 12px;" *ngIf="comment.user.displayName">{{ comment.user.displayName }} </div>
+            <div class="post-card__username" style="margin-top: 12px;"  *ngIf="!comment.user.displayName">{{ comment.user.username }}</div>
+            <div class="post-card__time" style="margin-top: 12px;" 
+              >[ Posted {{ comment.timestamp | dateAgo }} ]</div
+            >
+          </div>
+          <div class="iteract-comment">
+            <div *ngIf="authService.isLoggedIn()">
+              <div class="post-card__iteract" *ngIf="loggedInUser.username === comment.user.username && !editMode">
+                <span class="post-card__iteract-info">
+                  <button
+                    (click)="enableEdit()"
+                    class="post-card__iteract-user-btn"
+                    type="button"
+                  >
+                    Edit
+                  </button>
+                </span>
+                <span class="post-card__iteract-info"
+                  ><button
+                    (click)="deleteComment(comment)"
+                    class="post-card__iteract-user-btn spec-btn"
+                    type="button"
+                  >
+                    Delete
+                  </button></span
+                >
+              </div>
+              <div class="post-card__iteract" *ngIf="loggedInUser.username === comment.user.username && editMode">
+                <span class="post-card__iteract-info">
+                  <button
+                    (click)="saveEditedDesc(comment)"
+                    class="post-card__iteract-user-btn"
+                    type="button"
+                  >
+                    Save
+                  </button>
+                </span>
+                <span class="post-card__iteract-info">
+                  <button
+                    (click)="cancelEdit()"
+                    class="post-card__iteract-user-btn spec-btn"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="comments__text-wrapper">
+        <span class="comments__text" *ngIf="!editMode">{{ comment.text }}</span>
+        <textarea class="post-card__desc-edit comment-edit" #editedDesc (keyup)="getChangedDesc(editedDesc)" *ngIf="editMode" [value]="comment.text"></textarea>
+      </div>
+  
+      <div class="comments__interactions post-card__iteract-wrapper">
+        <div class="post-card__iteract">
+          <span class="comments__votes">
+            <app-vote-comments [comment]="comment"></app-vote-comments>
+          </span>
+          <span class="post-card__iteract-info" [ngClass]="{ 'reported-subreddit-btn' : reported }">
+            <button
+              (click)="replayToComment(comment.id)"
+              class="post-card__iteract-btn"
+              type="button"
+            >
+              <img
+                class="post-card__vote-img"
+                src="../../assets/images/comment.png"
+                alt="Replay to comment"
+              />
+              Replay
+            </button>
+          </span>
+          <span class="post-card__iteract-info">
+            <button
+              (click)="showReplays(comment.id)"
+              class="post-card__iteract-btn"
+              [ngClass]="{ 'show-replays': toggleReplays }"
+              type="button"
+            >
+              <img
+                class="post-card__vote-img"
+                src="../../assets/images/comment.png"
+                alt="Replay to comment"
+              />
+              Show Replays
+            </button>
+          </span>
+          <span class="post-card__iteract-info"
+            ><button
+              (click)="reportComment(comment.id)"
+              class="post-card__iteract-btn"
+              type="button"
+            >
+              <img
+                class="post-card__vote-img"
+                src="../../assets/images/report.png"
+                alt="Report Image"
+              />
+              Report
+            </button></span
+          >
+        </div>
+      </div>
+      <div>
+      </div>
+      <div
+        class="post-card__leave-comment-wrapper comments__interactions"
+        *ngIf="showCommentForm">
+        <form ngNativeValidate>
+          <textarea
+            class="post-card__leave-comment"
+            placeholder="Leave A Comment"
+            #commentData
+            required
+          ></textarea>
+          <button class="post-card__comment-btn"  type="submit" (click)="saveComment(commentData, comment.id)">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div class="post__card-report-actions-wrapper comments__actions remove-margin" *ngIf="reported">
+      <button class="post__card-report-actions" (click)="acceptReport(comment)">Accept</button>
+      <button class="post__card-report-actions" (click)="declineReport(comment)">Decline</button>
+    </div>
+    <div class="comments__child-wrapper" *ngFor="let child of childComments">
+      <div class="comments__child" *ngIf="toggleReplays">
+        <app-comments [comment]="child" [post]="post"></app-comments>
+      </div>
+    </div>
+  </div>
+</div>

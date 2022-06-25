@@ -1,0 +1,28 @@
+.footer {
+  background: $white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.footer__wrapper {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.footer__logo-wrapper {
+  margin-right: auto;
+}
+
+.footer__right-side {
+  margin-left: auto;
+}
+
+.footer__info {
+  color: $gray;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 25px;
+}

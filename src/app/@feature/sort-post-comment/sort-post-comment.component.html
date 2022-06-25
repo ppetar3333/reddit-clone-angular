@@ -1,0 +1,24 @@
+<div class="sort-wrapper">
+  <div class="select-wrapper" *ngIf="sortPostsDropdown">
+    <select class="sort" [(ngModel)]="selectedOptionPost" (change)="onSelectedItemPost(selectedOptionPost)">
+      <option 
+        class="sort-option"
+        selected
+        *ngFor="let item of sortPostsBy" 
+        [ngValue]="item" >
+        {{ 'Sort Posts By: ' + item }}
+      </option>
+    </select>
+  </div>
+  <div class="select-wrapper" *ngIf="sortCommentsDropdown">
+    <select class="sort"  [(ngModel)]="selectedOptionComment" (change)="onSelectedItemComment(selectedOptionComment)">
+      <option 
+        class="sort-option"
+        selected
+        *ngFor="let item of sortCommentsBy" 
+        [ngValue]="item" >
+        {{ 'Sort Comments By: ' + item }}
+      </option>
+    </select>
+  </div>
+</div>

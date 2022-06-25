@@ -1,0 +1,13 @@
+<nav class="nav">
+  <section class="top-nav">
+    <input id="menu-toggle" type="checkbox" />
+    <label class="menu-button-container" for="menu-toggle">
+      <div class="menu-button"></div>
+    </label>
+    <ul class="menu">
+      <app-nav-admin class="nav-special" *ngIf="admin | async"></app-nav-admin>
+      <app-nav-user class="nav-special" *ngIf="user | async"></app-nav-user>
+      <app-nav-moderator class="nav-special" *ngIf="moderator | async"></app-nav-moderator>
+    </ul>
+  </section>
+</nav>

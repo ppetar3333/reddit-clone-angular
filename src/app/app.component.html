@@ -1,0 +1,37 @@
+<div class="content" role="main">
+  <nav class="main-nav">
+    <div class="main-nav__container">
+      <ul class="main-nav__list">
+        <div class="main-nav__left-side">
+          <li class="main-nav__item">
+            <a routerLink="/"
+              ><img
+                class="main-nav__logo"
+                src="../../assets/images/logo.png"
+                alt="reddit logo"
+            /></a>
+          </li>
+        </div>
+        <div class="main-nav__right-side">
+          <li *ngIf="!(authService.isLoggedIn$ | async)" class="main-nav__item">
+            <a routerLink="login" class="btn btn--white">Log In</a>
+          </li>
+          <li *ngIf="!(authService.isLoggedIn$ | async)" class="main-nav__item">
+            <a routerLink="/register" class="btn btn--blue">Sign Up</a>
+          </li>
+          <li *ngIf="authService.isLoggedIn$ | async" class="main-nav__item">
+            <a
+              routerLink="/"
+              (click)="authService.logout()"
+              class="btn btn--blue"
+              >Logout</a
+            >
+          </li>
+          <app-nav *ngIf="authService.isLoggedIn$ | async"></app-nav>
+        </div>
+      </ul>
+    </div>
+  </nav>
+</div>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

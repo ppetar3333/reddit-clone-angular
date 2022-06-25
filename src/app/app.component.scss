@@ -1,0 +1,37 @@
+.main-nav {
+  width: 100%;
+  background: white;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.main-nav__logo {
+  width: 100px;
+  margin-right: auto;
+}
+
+.main-nav__list {
+  display: flex;
+  align-items: center;
+}
+
+.main-nav__item {
+  margin: 0 10px;
+}
+
+.main-nav__right-side {
+  display: flex;
+  margin-left: auto;
+  padding: 20px;
+}
+
+app-root {
+  min-height: 100vh;
+
+  display: block;
+
+  position: relative;
+
+  padding-bottom: 100px;
+}

@@ -1,0 +1,10 @@
+<mat-dialog-content>
+    <div class="modal-header">
+        <h4>Sure want to delete comment?</h4>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" [mat-dialog-close]="true" (click)="deleteComment()">Delete</button>
+    <button class="mat-raised-button" [mat-dialog-close]="true">Cancel</button>
+</mat-dialog-actions>

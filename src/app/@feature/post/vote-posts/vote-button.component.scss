@@ -1,0 +1,38 @@
+.post-card__vote-btn,
+.post-card__vote-number {
+  display: flex;
+  margin: 10px 20px 0 10px;
+}
+
+.post-card__vote-number {
+  @include center-flex-box;
+  font-weight: bold;
+  margin-left: 25px;
+  font-size: 13px;
+}
+
+.post-card__vote-btn {
+  padding: 5px;
+  fill: rgb(97, 95, 95);
+}
+
+.post-card__vote-btn:hover {
+  background-color: rgb(226, 221, 221);
+  transition: 0.3s all ease;
+}
+
+.up:hover {
+  fill: $green;
+}
+
+.down:hover {
+  fill: $red;
+}
+
+.voted-up {
+  fill: $green;
+}
+
+.voted-down {
+  fill: $red;
+}

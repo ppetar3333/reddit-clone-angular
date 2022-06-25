@@ -1,0 +1,116 @@
+.form__wrapper {
+  @include center-flex-box;
+  height: 100vh;
+  margin-top: 50px;
+  width: 60%;
+}
+
+.form__input-wrapper {
+  @include center-flex-box;
+  flex-direction: column;
+}
+
+.form {
+  @include center-flex-box;
+  height: 100vh;
+}
+
+.form__form {
+  background: $white;
+  text-align: center;
+  width: fit-content;
+  border-radius: 5px;
+}
+
+.form__input {
+  width: 300px;
+  background: $light-gray;
+  padding: 22px 12px 13px;
+  margin: 25px 10px 0px 10px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: 0;
+  appearance: none;
+  height: 48px;
+}
+
+.form__btn {
+  background: $blue;
+  color: $white;
+  width: 300px;
+  padding: 10px 0;
+  border-radius: 50px;
+  margin: 30px 0 20px 0;
+  cursor: pointer;
+  border: 1px solid $blue;
+  text-transform: unset;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form__btn:hover {
+  background: $white;
+  color: $blue;
+  transition: 0.2s ease-in-out;
+}
+
+.form__register-wrapper {
+  padding-bottom: 15px;
+}
+
+.form__register-btn {
+  color: $blue;
+}
+
+.form__register-info {
+  color: $gray;
+  margin: 10px;
+}
+
+.form__error {
+  color: $red;
+  margin: 0 0 10px 0;
+  padding-bottom: 15px;
+  font-size: 17px;
+}
+
+.form__policy-wrapper {
+  text-align: left;
+  margin: 40px 50px 20px 50px;
+}
+
+.form__policy {
+  padding: 10px 0;
+  width: max-content;
+  color: $gray;
+}
+
+.form__policy:first-child {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.form__policy-link {
+  color: $blue;
+}
+
+.form__form {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.form__image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: -3px;
+}
+
+.form__error-text {
+  color: $red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.form__error-input {
+  border: 1px solid $red;
+}

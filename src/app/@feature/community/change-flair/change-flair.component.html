@@ -1,0 +1,54 @@
+<section class="users">
+    <div class="users__wrapper container">
+      <div class="users__header">
+          <h3 class="users__header-title">
+              Welcome, <span class="users__header-info-spec">{{ loggedInUser?.username }}</span> 
+          </h3>
+          <p class="users__header-subtitle">Manipulate Flairs</p>
+          <p class="users__header-info">Users can sometimes forget where they are now, so feel free to describe subreddit with some flairs.</p>
+      </div>
+          <div class="example-header" fxLayout="row">
+          <form class="form-field" fxLayout="row" [formGroup]="collectionForm">
+              <mat-form-field appearance="fill">
+                  <mat-label matNativeControl>Search</mat-label>
+                      <input matInput [formControlName]="'filter'">
+              </mat-form-field>
+              <div (click)="openCreateNewDialog()" class="create-new">
+                <img src="../../../../assets/images/add.png" class="create-new-img" alt="">
+              </div>
+          </form>
+        </div>
+        
+        <div class="example-container mat-elevation-z8">
+        
+          <mat-table [dataSource]="dataSource" matSort>
+        
+            <ng-container matColumnDef="Flair">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Flair </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="Flair"> {{row}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Remove">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Remove </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="Remove"> 
+                <button (click)="removeFlair(row)" class="actions-btn">Remove</button>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Edit">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="Edit"> 
+                <button (click)="editFlair(row)" class="actions-btn">Edit</button>
+              </mat-cell>
+            </ng-container>
+  
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+        </div>
+        <div class="paginator">
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+    </div>
+  </section>
+  

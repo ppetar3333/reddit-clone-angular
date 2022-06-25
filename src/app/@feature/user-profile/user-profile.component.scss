@@ -1,0 +1,147 @@
+.profile {
+  margin-top: 150px;
+}
+
+.profile-title__wrapper {
+  @include center-flex-box;
+  margin-bottom: 100px;
+}
+
+.profile__avatar-img {
+  width: 100px;
+  display: flex;
+  margin-right: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s all ease;
+}
+
+.editMode {
+  opacity: 0.6;
+}
+
+.profile__avatar-img:hover {
+  transform: scale(1.1);
+  transition: 0.3s all ease;
+}
+
+.profile__data-avatar {
+  display: block;
+}
+
+.restart {
+  margin-top: 25px !important;
+}
+
+.profile__get-photo-btn {
+  margin-bottom: 20px;
+  margin-top: 5px;
+  background: $blue;
+  color: $white;
+  padding: 10px;
+  border: 1px solid $blue;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 11px;
+  transition: 0.3s all ease;
+}
+
+.profile__get-photo-btn:hover {
+  background: $white;
+  color: $blue;
+  transition: 0.3s all ease;
+}
+
+.avatar-choose-one {
+  padding-bottom: 10px;
+}
+
+.profile__avatar-wrapper {
+  display: flex;
+}
+
+.profile__data-avatar {
+  display: flex;
+}
+
+.profile__karma-number {
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.profile__karma {
+  padding-top: 30px;
+  font-size: 14px;
+  color: $dark-gray;
+}
+
+.profile__karma-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile__title {
+  font-size: 23px;
+  color: $dark-gray;
+}
+
+.profile__data-wrapper {
+  margin-top: 50px;
+}
+
+.profile__txt-spec {
+  color: $blue;
+  font-weight: bold;
+}
+
+.profile__data-btn {
+  margin-right: 20px;
+  width: 160px;
+  background: $blue;
+  color: $white;
+  border-radius: 2px;
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 100px;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid $blue;
+}
+
+.profile__data-btn:hover {
+  transition: 0.2s all ease;
+  background: $white;
+  color: $blue;
+}
+
+.profile__data-input {
+  display: block;
+  margin: 20px 0;
+  width: 240px;
+  font-size: 12px;
+  padding: 12px;
+  background: #c3c0c0;
+  border-radius: 2px;
+  outline: none;
+  appearance: none;
+}
+
+.profile__data-title {
+    font-weight: bold;
+    font-size: 17px;
+  }
+
+.profile__desc {
+    color: #5b5b5b;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.profile__title-wrapper {
+  @include center-flex-box;
+}

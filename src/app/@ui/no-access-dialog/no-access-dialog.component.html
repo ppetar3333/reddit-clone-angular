@@ -1,0 +1,9 @@
+<mat-dialog-content>
+    <div class="modal-header">
+        <h4>{{ dialogText }}</h4>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" [mat-dialog-close]="true" routerLink="{{navigateTo}}">{{buttonText}}</button>
+</mat-dialog-actions>

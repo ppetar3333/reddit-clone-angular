@@ -1,0 +1,90 @@
+<section class="post-card">
+    <div class="post-card__wrapper">
+      <div class="post-card__report-wrapper" *ngIf="reported">
+        <p class="post-card__report">Report Reason: {{ reportedReason }}</p>
+      </div>
+      <div class="post-card__content" [ngClass]="{'reported' : reported}">
+        <div class="post-card__left-side">
+          <div class="post-card__vote-wrapper">
+            <app-vote-button [post]="post"></app-vote-button>
+          </div>
+        </div>
+        <div class="post-card__right-side">
+          <div class="post-card__username-wrapper">
+            <div class="post-card__username-left">
+              <span class="post-card__avatar"
+                ><img
+                  class="post-card__avatar-img"
+                  src="{{ post.user.avatar || '/' }}"
+                  alt="Avatar Image"
+              /></span>
+              <span class="post-card__username">{{ post.user.username }}</span>
+              <span class="post-card__time"
+                >[ Posted {{ post.creationDate | dateAgo }} ]</span
+              >
+              <span class="post-card__time" *ngIf="post.flair"
+                >Flair - {{ post.flair.name }}</span
+              >
+            </div>
+            <div></div>
+            <div class="post-card__username-right" [ngClass]="{ 'reported-subreddit-btn' : reported }">
+              <span class="post-card__community"
+                ><a
+                  class="post-card__community-link btn--blue"
+                  [routerLink]="['/community', post.subreddit.subredditID]"
+                  >{{ post.subreddit.name }}</a
+                ></span
+              >
+            </div>
+          </div>
+          <div class="post-card__info-wrapper">
+            <h4 class="post-card__title">
+              {{ post.title }}
+            </h4>
+            <span class="post-card__desc">{{ post.text }}</span>
+            <span class="post-card__img" *ngIf="post.imagePreview"
+              ><img
+                class="post-card__img-post"
+                src="{{ post.imagePreview }}"
+                alt="Post Image"
+            /></span>
+          </div>
+          <div class="post-card__iteract">
+            <span class="post-card__iteract-info">
+              <button
+                (click)="postCard.showComments(post.postID)"
+                class="post-card__iteract-btn"
+                type="button"
+              >
+                <img
+                  class="post-card__vote-img"
+                  src="../../assets/images/comment.png"
+                  alt="comment image"
+                />
+                Comments
+              </button>
+            </span>
+            <span class="post-card__iteract-info"
+              ><button
+                (click)="postCard.reportPost(post.postID)"
+                class="post-card__iteract-btn"
+                type="button"
+              >
+                <img
+                  class="post-card__vote-img"
+                  src="../../assets/images/report.png"
+                  alt="Report Image"
+                />
+                Report
+              </button></span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="post__card-report-actions-wrapper" *ngIf="reported">
+        <button class="post__card-report-actions" (click)="acceptReport(post)">Accept</button>
+        <button class="post__card-report-actions" (click)="declineReport(post)">Decline</button>
+      </div>
+    </div>
+  </section>
+  

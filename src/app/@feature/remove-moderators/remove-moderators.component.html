@@ -1,0 +1,51 @@
+<section class="users">
+    <div class="users__wrapper container">
+      <div class="users__header">
+          <h3 class="users__header-title">
+              Welcome, <span class="users__header-info-spec">{{loggedInUser?.username}}</span> 
+          </h3>
+          <p class="users__header-subtitle">Remove Moderators</p>
+          <p class="users__header-info spec">Moderators can sometimes be unhelpful, so if you feel like you need to remove some of them, go on.</p>
+      </div>
+      <div class="example-header" fxLayout="row">
+        <form class="form-field" fxLayout="row" [formGroup]="collectionForm">
+            <mat-form-field appearance="fill">
+                <mat-label matNativeControl>Search</mat-label>
+                    <input matInput [formControlName]="'filter'">
+            </mat-form-field>
+        </form>
+      </div>
+      <div class="example-container mat-elevation-z8" *ngIf="observeUsers() | async as usersList">
+          <mat-table [dataSource]="usersList" matSort>
+            <ng-container matColumnDef="username">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="id"> {{row.username}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="progress"> {{row.email}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="role">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="name"> {{row.role}} </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="block">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+              <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color">
+                  <button (click)="removeModerator(row.username)" class="actions-btn">Remove</button>
+              </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+      </div>
+      <div class="paginator">
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+    </div>
+  </section>
+  

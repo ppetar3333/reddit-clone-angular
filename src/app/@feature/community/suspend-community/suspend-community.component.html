@@ -1,0 +1,19 @@
+<mat-dialog-content>
+    <div class="modal-header">
+        <h4>Suspend Community</h4>
+        <form ngNativeValidate>
+            <mat-form-field appearance="fill">
+                <mat-label matNativeControl>Enter Suspend Reason</mat-label>
+                <textarea 
+                    matInput
+                    (keyup)="getSuspendedReason($event.target)">
+                </textarea>
+            </mat-form-field>
+        </form>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" [mat-dialog-close]="true" (click)="suspendBtn()">Suspend</button>
+    <button class="mat-raised-button" [mat-dialog-close]="true">Cancel</button>
+</mat-dialog-actions>

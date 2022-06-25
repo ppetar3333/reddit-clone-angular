@@ -1,0 +1,48 @@
+<section class="reported-data">
+    <div class="reported-data__wrapper container">
+        <div class="report-data-header">
+            <h3 class="reported-data__title">Reported <span class="reported-data__title-spec">Posts/Comments</span></h3>
+            <p class="reported-data__info">Some users can sometimes break some rules. If this is a case, go ahead and accept or decline report.</p>
+        </div>
+    </div>
+    <div *ngIf="isLoading" class="loader__wrapper">
+        <div class="loader"></div>
+      </div>
+    <div *ngIf="!isLoading">
+        <div class="" *ngIf="reportedPostsList.length > 0">
+            <h4 class="reported-data__heading-post">Posts</h4>
+            <div class="reported-data__posts">
+                <div *ngIf="reportedPostsList.length > 0">
+                    <div class="comments" *ngFor="let report of reportedPostsList">
+                      <app-post-reported 
+                          [reported]="true"
+                          (acceptDeclineReport)="acceptDeclineReport()"
+                          [reportedReason]="report.reportReason"
+                          [post]="report.post">
+                      </app-post-reported >
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="" *ngIf="reportedCommentsList.length > 0">
+            <h4 class="reported-data__heading-comment">Comments</h4>
+            <div class="reported-data__posts">
+                <div *ngIf="reportedCommentsList.length > 0">
+                  <div class="comments" *ngFor="let report of reportedCommentsList">
+                    <app-comments 
+                        [reported]="true"
+                        (acceptDeclineReport)="acceptDeclineReport()"
+                        [reportedReason]="report.reportReason"
+                        [post]="report.comment.post"
+                        [comment]="report.comment">
+                    </app-comments>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="reported-data__no-data" *ngIf="reportedPostsList.length === 0 && reportedCommentsList.length === 0">
+            <h3 class="reported-data__no-data-title">No Data For Review</h3>
+            <img class="reported-data__no-data-img" src="../../../assets/images/no-data.png" alt="">
+        </div>
+    </div>
+</section>

@@ -1,0 +1,23 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./scss/abstract/mixins";
+@import "./scss/abstract/variables";
+@import "./scss/base/reset";
+@import "./scss/utilities/container";
+@import "./scss/utilities/utilities";
+@import "./app/app.component.scss";
+@import "./scss/components/button";
+@import "./scss/components/form";
+@import "./app/@ui/nav/nav.component.scss";
+@import "./app/@feature/home-page/home-page.component.scss";
+@import "./app/@feature/community/community-page/community-page.component.scss";
+@import "./app/@feature/post/post-card/post-card.component.scss";
+@import "./app/@feature/sort-post-comment/sort-post-comment.component.scss";
+@import "./app/@feature/post/vote-posts/vote-button.component.scss";
+@import "./app/@feature/post/single-post/single-post.component.scss";
+@import "./app/@feature/user-profile/user-profile.component.scss";
+@import "./scss/components/comments";
+@import "./scss/components/footer";
+@import "./scss/components/add-subreddit-post";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

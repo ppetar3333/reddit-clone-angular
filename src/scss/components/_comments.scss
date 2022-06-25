@@ -1,0 +1,74 @@
+.comments {
+  background: $white;
+}
+
+.comments:last-child {
+  margin-bottom: 50px;
+}
+
+.show-replays {
+  color: $blue;
+  transition: 1s all ease-in-out;
+}
+
+.no-replays {
+  color: $red;
+}
+
+.comments__content {
+  margin-left: 30px;
+}
+
+.remove-margin {
+  margin-left: -30px;
+}
+
+.comments__user,
+.comments__text-wrapper,
+.comments__interactions {
+  margin-left: 25px;
+}
+
+.comments__user {
+  .post-card__username {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .post-card__username-left {
+    padding-top: 15px;
+  }
+}
+
+.comments__text-wrapper {
+  display: block;
+  max-width: 550px;
+  margin-top: 10px;
+}
+
+.comments__karma {
+  margin: 0 10px 0 10px;
+  font-weight: bold;
+  font-size: 13px;
+  align-items: center;
+  justify-content: center;
+}
+
+.comments__votes {
+  margin: 0 20px 20px 0;
+}
+
+.comments__text {
+  font-size: 13px;
+  color: $dark-gray;
+}
+
+.comments__vote-btn {
+  fill: rgb(97, 95, 95);
+  padding: 5px;
+}
+
+.comments__vote-btn:hover {
+  background-color: rgb(226, 221, 221);
+  transition: 0.3s all ease;
+}

@@ -1,0 +1,15 @@
+.home__title-spec {
+  color: $red;
+  font-weight: bold;
+}
+
+.home__title {
+  font-size: 18px;
+  border-bottom: 1px solid $lighter-gray;
+  padding: 25px 0;
+}
+
+.home {
+  max-width: 800px;
+  margin-top: 100px;
+}

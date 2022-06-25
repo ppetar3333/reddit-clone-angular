@@ -1,0 +1,17 @@
+<mat-dialog-content>
+    <div class="modal-header">
+        <h4 #title>Add New Flair</h4>
+        <mat-icon [mat-dialog-close]="true">close</mat-icon>
+    </div>
+    <form class="create-club" [formGroup]="formGroup">
+        <mat-form-field appearance="fill">
+            <mat-label>Flair</mat-label>
+            <input formControlName="flair" matInput required>
+        </mat-form-field>
+        <div class="create-club__actions">
+            <button class="mat-raised-button mat-primary" (click)="createNewFlair()" *ngIf="!editMode">Save</button>
+            <button class="mat-raised-button mat-primary" (click)="editExistingFlair()" *ngIf="editMode">Edit</button>
+            <button class="mat-raised-button" [mat-dialog-close]="true">Close</button>
+        </div>
+    </form>
+</mat-dialog-content>

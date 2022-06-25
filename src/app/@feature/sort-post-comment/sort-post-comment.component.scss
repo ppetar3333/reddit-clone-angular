@@ -1,0 +1,24 @@
+.sort-wrapper {
+  .select-wrapper {
+    width: 100%;
+  }
+
+  .select-wrapper::after {
+    color: $red !important;
+  }
+}
+
+.sort {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: block;
+  width: 100%;
+  outline: none;
+  color: $red;
+  font-weight: bold;
+  font-size: 13px;
+  appearance: none;
+  padding: 10px;
+  border-radius: 2px;
+  cursor: pointer;
+}

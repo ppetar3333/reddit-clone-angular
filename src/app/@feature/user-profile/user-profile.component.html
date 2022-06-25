@@ -1,0 +1,162 @@
+<section class="profile container">
+  <div class="profile__wrapper">
+    <div class="profile__title-wrapper">
+      <h3 class="profile__title">
+        Profile
+        <span class="profile__txt-spec">Details</span>
+      </h3>
+    </div>
+  </div>
+  <div class="profile__karma-wrapper">
+    <p class="profile__karma">Be patient about upvote and downvote. Your karma is <span class="profile__karma-number">{{ karmaUser }}</span></p>
+  </div>
+  <form ngNativeValidate [formGroup]="userForm" (ngSubmit)="saveData()">
+    <div class="profile__data-wrapper">
+      <div class="profile__data-title">
+        Avatar
+      </div>
+      <p class="profile__desc">
+        Change avatar image if you want.
+      </p>
+      <button class="profile__get-photo-btn" (click)="showAvatars()" type="button" [disabled]="!editMode" [ngClass]="{'editMode' : !editMode}">
+        Get Photo
+      </button>
+      <div class="" *ngIf="showAvatarsCollection">
+        <p class="profile__desc avatar-choose-one">Choose One</p>
+        <div class="profile__data-avatar" style="display: block;">
+          <div style="display: flex;">
+            <div *ngFor="let url of avatarsCollection" class="profile__avatar-wrapper">
+              <img src="{{url}}" class="profile__avatar-img" (click)="selectedImg(url)">
+            </div>
+          </div>
+          <button class="profile__get-photo-btn restart" (click)="restartAvatarCollection()" type="button">
+            Restart
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="profile__data-wrapper">
+        <p class="profile__data-title">Username</p>
+        <p class="profile__desc">
+          Username helps users to find you easier.
+        </p>
+        <input
+          class="profile__data-input"
+          type="text"
+          required
+          [value]="user?.username"
+          formControlName="username"
+          [ngClass]="{
+            'form__error-input': validations.displayErrorMessageUsername
+          }"
+          #username
+          (keyup)="validations.showErrorUsername(username.value)"
+        />
+        <p
+        *ngIf="validations.displayErrorMessageUsername"
+        class="form__error-text"
+        >
+        {{ validations.usernameErrorMessage }}
+        </p>
+        <p *ngIf="validations.errorUsernameExists" class="form__error-text">
+            {{ validations.usernameExistsMessage }}
+        </p>
+    </div>
+    <div class="profile__data-wrapper">
+        <p class="profile__data-title">Email</p>
+        <p class="profile__desc">
+          People can't see you email, just us.
+        </p>
+        <input
+          class="profile__data-input"
+          type="text"
+          required
+          [value]="user?.email"
+          formControlName="email"
+          [ngClass]="{
+            'form__error-input': validations.displayErrorMessageEmail
+          }"
+          #email
+          (keyup)="validations.showErrorEmail(email.value)"
+        />
+        <p
+        *ngIf="validations.displayErrorMessageEmail"
+        class="form__error-text"
+        >
+        {{ validations.emailErrorMessage }}
+        </p>
+    </div>
+    <div class="profile__data-wrapper">
+      <p class="profile__data-title">Display Name</p>
+      <p class="profile__desc">
+        People will see your display name istead of username.
+      </p>
+      <input
+        class="profile__data-input"
+        type="text"
+        [value]="user?.displayName"
+        formControlName="displayName"
+        [ngClass]="{
+          'form__error-input': validations.displayErrorMessageDisplayName
+        }"
+        #displayName
+        (keyup)="validations.showErrorDisplayName(displayName.value)"
+      />
+      <p
+      *ngIf="validations.displayErrorMessageDisplayName"
+      class="form__error-text"
+      >
+      {{ validations.displayNameErrorMessage }}
+      </p>
+    </div>
+    <div class="profile__data-wrapper">
+      <p class="profile__data-title">Profile Description</p>
+      <p class="profile__desc">
+        If you want, you can add description of your profile.
+      </p>
+      <textarea
+        class="profile__data-input"
+        type="text"
+        [value]="user?.profileDescription || ''"
+        formControlName="profileDesc"
+        #profileDesc >
+      </textarea>
+    </div>
+    <div class="profile__data-wrapper">
+        <p class="profile__data-title">Password</p>
+        <p class="profile__desc">
+          Don't worry, no one can see you password it's encrypted.
+        </p>
+        <input
+          class="profile__data-input"
+          type="password"
+          disabled
+          [value]="user?.password" />
+    </div>
+    <div class="profile__data-wrapper">
+        <p class="profile__data-title">Status</p>
+        <p class="profile__desc">
+          Be careful, admins and moderators can ban your account.
+        </p>
+        <input
+          class="profile__data-input"
+          type="text"
+          disabled
+          [value]="userStatus()" />
+    </div>
+    <div class="profile__data-wrapper">
+        <p class="profile__data-title">Registration Date</p>
+        <p class="profile__desc">
+          We keep in track when our user is registered.
+        </p>
+        <input
+          class="profile__data-input"
+          type="text"
+          disabled
+          [value]="user?.registrationDate | dateAgo" />
+        <button class="profile__data-btn" type="submit" (click)="enableEditMode()" *ngIf="!editMode">Edit</button>
+        <button class="profile__data-btn" type="submit" *ngIf="editMode">Confirm Changes</button>
+        <button class="profile__data-btn" type="submit" (click)="changePassword()">Change Password</button>
+    </div>
+  </form>
+</section>

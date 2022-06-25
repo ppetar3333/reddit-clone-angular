@@ -1,0 +1,270 @@
+.post-card {
+  max-width: 800px;
+}
+
+.post-card__vote-img {
+  width: 17px;
+  margin: -4px;
+  margin-right: 4px;
+}
+
+.post-card__wrapper {
+  border: 1px solid rgb(202, 197, 197);
+  background: white;
+  margin-top: 50px;
+}
+
+.post-card__content {
+  display: flex;
+}
+
+.reported {
+  opacity: 0.7;
+}
+
+.post__card-report-actions-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.post-card__report {
+  padding-top: 10px;
+  width: 100%;
+  color: $dark-gray;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.post__card-report-actions {
+  padding: 6px 20px;
+  border-radius: 5px;
+  display: flex;
+  margin: 5px 10px;
+  border: 1px solid #0080ff;
+  background: $blue;
+  color: $white;
+  font-weight: bold;
+  transition: all 0.4s ease;
+}
+
+.reported-subreddit-btn {
+  pointer-events: none;
+}
+
+.comments__actions {
+  padding-bottom: 20px;
+}
+
+.comments__report-title {
+  padding-top: 10px;
+}
+
+.post__card-report-actions:last-child {
+  background: $red;
+  color: $white;
+  border: 1px solid $red;
+}
+
+.post__card-report-actions:last-child:hover {
+  background: $white;
+  color: $red;
+  transition: all 0.4s ease;
+}
+
+.post__card-report-actions:hover {
+  background-color: $white;
+  color: $blue;
+  transition: all 0.4s ease;
+}
+
+.post-card__report-wrapper {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.post-card__wrapper:last-child {
+  margin-bottom: 50px;
+}
+
+.post-card__img-post {
+  max-width: 90%;
+  margin-top: 20px;
+  max-height: 400px;
+  display: flex;
+}
+
+.post-card__username {
+  color: gray;
+  font-size: 14px;
+}
+
+.post-card__desc {
+  color: rgb(57, 55, 55);
+  line-height: 25px;
+  display: block;
+  text-align: left;
+  max-width: 550px;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.post-card__username-wrapper {
+  display: flex;
+}
+
+.post-card__username-left {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+.post-card__username-right {
+  margin-left: auto;
+}
+
+.post-card__left-side {
+  width: 5%;
+}
+
+.post-card__right-side {
+  width: 95%;
+  margin: 15px 10px 15px 20px;
+}
+
+.post-card__avatar {
+  margin-right: 10px;
+}
+
+.post-card__avatar-img {
+  width: 40px;
+  border-radius: 100px;
+}
+
+.post-card__img,
+.post-card__info-wrapper {
+  margin: 10px 0;
+}
+
+.post-card__title {
+  font-size: 18px;
+  margin-right: 20px;
+  margin-top: 20px;
+  color: $dark-gray;
+  text-align: left;
+}
+
+.post-card__iteract {
+  margin-top: 20px;
+  display: flex;
+}
+
+.post-card__iteract-btn {
+  color: gray;
+  margin: 0 10px 5px 0;
+  padding: 5px;
+}
+
+.post-card__iteract-btn:hover {
+  background: rgb(226, 221, 221);
+  transition: 0.2s all ease;
+}
+
+.post-card__community-link {
+  padding: 5px 15px;
+  border-radius: 15px;
+  display: flex;
+  margin: 5px 10px;
+  border: 1px solid #0080ff;
+}
+
+.post-card__community-link:hover {
+  color: #034d96 !important;
+}
+
+.post-card__info-wrapper {
+  margin-right: 30px;
+}
+
+.post-card__leave-comment {
+  width: 86%;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  outline: none;
+  user-select: text;
+  border: 1px solid $light-black;
+  border-radius: 2px;
+  padding: 10px;
+  font-size: 12px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  line-height: 16px;
+  background-color: #dae0e6;
+}
+
+.post-card__comment-btn {
+  width: 86%;
+  font-size: 12px;
+  padding: 5px 0 5px 0;
+  cursor: pointer;
+  color: $white;
+  margin-bottom: 5px;
+  background: $red;
+  font-weight: bold;
+  border-radius: 2px;
+  border: 1px solid $red;
+}
+
+.post-card__comment-btn:hover {
+  background: $white;
+  color: $red;
+  transition: 0.3s all ease;
+}
+
+.post-card__time {
+  color: gray;
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+.post-card__iteract-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-card__iteract-user-btn {
+  margin-right: 20px;
+  width: 60px;
+  padding: 5px 0;
+  color: $white;
+  background: $blue;
+  font-weight: 600;
+  border-radius: 3px;
+  transition: 0.2s all ease;
+  border: 1px solid $blue;
+}
+
+.right-side {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+}
+
+.iteract-comment {
+  margin-right: 83px;
+}
+
+.spec-btn {
+  background: $red;
+  color: $white;
+  border: 1px solid $red;
+  margin-left: 5px;
+}
+
+.spec-btn:hover {
+  color: $red;
+}

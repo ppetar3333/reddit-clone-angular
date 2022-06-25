@@ -1,0 +1,150 @@
+<section class="add-subreddit-post container">
+  <div class="add-subreddit-post__wrapper">
+    <form ngNativeValidate (ngSubmit)="createPost(title.value, description.value)">
+      <div class="add-subreddit-post__title-wrapper">
+        <h3 class="add-subreddit-post__title">
+          Share your opinion, create new
+          <span class="add-subreddit-post__txt-spec">post</span>
+        </h3>
+      </div>
+      <div class="add-subreddit-post__desc-wrapper">
+        <h5 class="add-subreddit-post__desc-title">Add Post</h5>
+        <p class="add-subreddit-post__desc">
+          By submiting you are agreed with
+          <span class="add-subreddit-post__txt-wrapper"
+            ><a
+              class="add-subreddit-post__txt-spec"
+              href="https://www.redditinc.com/policies/user-agreement"
+              target="blank"
+              >terms</a
+            ></span
+          >
+          and
+          <span class="add-subreddit-post__txt-wrapper"
+            ><a
+              class="add-subreddit-post__txt-spec"
+              href="https://www.redditinc.com/policies/privacy-policy"
+              target="blank"
+              >policy.</a
+            ></span
+          >
+        </p>
+      </div>
+      <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">Choose Community</p>
+        <p class="add-subreddit-post__desc">
+          By choosing community you are getting more views to your post.
+        </p>
+        <div class="select-wrapper">
+          <select
+            class="add-subreddit-post__data-name"
+            (change)="getSubreddit($event)"
+          >
+            <option
+              *ngFor="let subreddit of subreddits"
+              [ngValue]="subreddit.subredditID"
+            >
+              {{ subreddit.name }}
+            </option>
+          </select>
+
+        </div>
+      </div>
+      <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">Title</p>
+        <p class="add-subreddit-post__desc">
+          Most important thing of the post is title.
+        </p>
+        <input
+          class="add-subreddit-post__data-name"
+          type="text"
+          #title
+          required
+          placeholder="Title"
+          [ngClass]="{
+            'form__error-input': validations.displayErrorMessageTitle
+          }"
+          (keyup)="validations.showErrorTitle(title.value)"
+        />
+        <p
+        *ngIf="validations.displayErrorMessageTitle"
+        class="form__error-text"
+       >
+        {{ validations.titleErrorMessage }}
+      </p>
+      </div>
+      <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">Description</p>
+        <p class="add-subreddit-post__desc">
+          Say what you mean by writing a description
+        </p>
+        <input
+          #description
+          class="add-subreddit-post__data-name"
+          type="text"
+          required
+          [ngClass]="{
+            'form__error-input': validations.displayErrorMessageDescription
+          }"
+          (keyup)="validations.showErrorDescription(description.value)"
+          placeholder="Description"
+        />
+        <p
+        *ngIf="validations.displayErrorMessageDescription"
+        class="form__error-text"
+       >
+        {{ validations.descriptionErrorMessage }}
+      </p>
+      </div>
+      <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">Image</p>
+        <p class="add-subreddit-post__desc">Choose image if you like.</p>
+        <label for="file-upload" class="custom-file-upload">
+          <img
+            class="file-upload__img"
+            src="../../assets/images/cloud-arrow-up-solid.svg"
+            alt="Upload Image Svg File"
+          />
+          Upload Image
+        </label>
+        <p class="form__error-text" *ngIf="bigImageError">
+          {{ bigImageErrorMessage }}
+        </p>
+        <input
+          id="file-upload"
+          class="add-subreddit-post__data-name"
+          type="file"
+          placeholder="Image"
+          accept="image/*"
+          #file
+          (change)="preview(file.files)"
+        />
+        <div class="add-subreddit-post__img-wrapper">
+          <img class="add-subreddit-post__img" [src]="imgURL" *ngIf="imgURL" />
+        </div>
+      </div>
+      <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">Flair</p>
+        <p class="add-subreddit-post__desc">
+          By choosing flair you are helping your post to see right people.
+        </p>
+        <div class="select-wrapper">
+          <select
+            class="add-subreddit-post__data-name"
+            (change)="getFlair($event)"
+          >
+            <option value=""></option>
+            <option *ngFor="let flair of flairs" [ngValue]="flair.flairID">
+              {{ flair.name }}
+            </option>
+          </select>
+        </div>
+        <input
+          class="add-subreddit-post__data-btn"
+          value="Create Post"
+          type="submit"
+        />
+      </div>
+    </form>
+  </div>
+</section>
