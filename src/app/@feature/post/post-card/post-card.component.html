@@ -42,7 +42,14 @@
           <h4 class="post-card__title">
             {{ post.title }}
           </h4>
-          <span class="post-card__desc">{{ post.text }}</span>
+          <ng-container *ngIf="post.textFromPdf">
+            <span class="post-card__desc">
+              <p *ngFor="let line of post.textFromPdf.split('\n')">{{ line }}</p>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="!post.textFromPdf">
+            <span class="post-card__desc">{{ post.text }}</span>
+          </ng-container>
           <span class="post-card__img" *ngIf="post.imagePreview"
             ><img
               class="post-card__img-post"

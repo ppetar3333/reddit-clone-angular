@@ -6,9 +6,9 @@ export class AddPost {
   constructor(
     public title: string,
     public description: string,
-    public user: User,
-    public flair: Flair,
-    public subreddit: Subreddit,
+    public user: any,
+    public flair: any,
+    public subreddit: any,
     public image: string
   ) {}
 }

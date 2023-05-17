@@ -33,6 +33,13 @@ export class AddPostComponent implements OnInit {
   image: string = '';
   bigImageError: boolean = false;
   bigImageErrorMessage: string = 'Maximum size of image is 2MB';
+  pdfFileError: any;
+  pdfFileErrorMessage: string = '';
+  pdfURL: any;
+  pdfPath: any;
+  pdfName: string = '';
+  formDataPDF: any;
+  pdf: any;
 
   constructor(
     private subredditService: SubredditService,
@@ -93,6 +100,24 @@ export class AddPostComponent implements OnInit {
     }
   }
 
+  public uploadPdf(files: any): void {
+    if (files[0].size > 2062954) {
+      this.pdfFileErrorMessage = 'File is too big.';
+    } else {
+      this.pdfFileErrorMessage = '';
+      this.pdfName = files[0].name;
+      this.pdf = files[0];
+      var reader = new FileReader();
+      this.pdfPath = files;
+      this.formDataPDF = new FormData();
+      this.formDataPDF.append('pdfFile', files[0]);
+      reader.readAsDataURL(files[0]);
+      reader.onload = (_event) => {
+        this.pdfURL = reader.result;
+      };
+    }
+  }
+
   public createPost(titleInput: string, description: string): void {
     if (!this.validations.ok) {
       this.post.title = titleInput;
@@ -102,7 +127,7 @@ export class AddPostComponent implements OnInit {
 
       if (this.imagePath) this.post.image = this.imagePath[0].name;
 
-      this.postService.savePost(this.post).subscribe((postId) => this.automaticallyUpvotePost(postId as unknown as number));
+      this.postService.savePost(this.post, this.pdf).subscribe((postId) => this.automaticallyUpvotePost(postId as unknown as number));
 
       if (this.imagePath)
         this.postService.saveImage(this.imagePath[0]).subscribe(() => {});

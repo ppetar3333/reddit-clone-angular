@@ -37,8 +37,19 @@
           <h4 class="post-card__title">
             {{ post.title }}
           </h4>
-          <span *ngIf="!editMode" class="post-card__desc">{{ post.text }}</span>
-          <textarea class="post-card__desc-edit" #editedDesc (keyup)="getChangedDesc(editedDesc)" *ngIf="editMode" [value]="post.text"></textarea>
+          <ng-container *ngIf="!editMode">
+            <ng-container *ngIf="post.textFromPdf">
+              <span class="post-card__desc">
+                <p *ngFor="let line of post.textFromPdf.split('\n')">{{ line }}</p>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="!post.textFromPdf">
+              <span class="post-card__desc">{{ post.text }}</span>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="editMode">
+            <textarea class="post-card__desc-edit" #editedDesc (keyup)="getChangedDesc(editedDesc)" *ngIf="editMode" [value]="post.text"></textarea>
+          </ng-container>
           <span class="post-card__img" *ngIf="post.imagePreview"
             ><img
               class="post-card__img-post"

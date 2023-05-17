@@ -16,7 +16,7 @@ import { ReportDialogComponent } from '../../report-dialog/report-dialog.compone
   providedIn: 'root',
 })
 export class PostCardComponent implements OnInit {
-  @Input('posts') posts: Post[] = [];
+  @Input('posts') posts: any[] = [];
   @Input('reported') reported: boolean = false;
   @Input('reportedReason') reportedReason: string = '';
   @Output('acceptDeclineReport') acceptDeclineReport = new EventEmitter<boolean>(); 

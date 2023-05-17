@@ -74,17 +74,17 @@ export class PostService {
     { responseType: 'text' });
   }
 
-  public savePost(post: AddPost): Observable<string> {
+  public savePost(post: AddPost, file: any): Observable<string> {
+    const formData: FormData = new FormData();
+  
+    formData.append('files', file);
+    formData.append('title', post.title);
+    formData.append('text', post.description);
+    formData.append('imagePath', post.image);
+  
     return this.httpClient.post(
-      `${this.APIurl}/save`,
-      {
-        title: post.title,
-        text: post.description,
-        flair: post.flair,
-        subreddit: post.subreddit,
-        user: post.user,
-        imagePath: post.image,
-      },
+      `${this.APIurl}/save/${post.user.userID}/${post.flair.flairID}/${post.subreddit.subredditID}`,
+      formData,
       { responseType: 'text' }
     );
   }

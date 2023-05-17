@@ -18,7 +18,7 @@ import { PostCardComponent } from '../post-card/post-card.component';
   templateUrl: './single-post.component.html',
 })
 export class SinglePostComponent implements OnInit {
-  public post!: Post;
+  public post!: any;
   public id!: any;
   public postComments: Array<any> = [];
   public childComments: Array<Comment> = [];
