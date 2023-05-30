@@ -38,6 +38,7 @@ import { CreateEditRuleComponent } from './@feature/community/change-rules/creat
 import { CreateEditFlairComponent } from './@feature/community/change-flair/create-edit-flair/create-edit-flair.component';
 import { DeletePostComponent } from './@feature/post/delete-post/delete-post.component';
 import { DeleteCommentComponent } from './@feature/comments/delete-comment/delete-comment.component';
+import { CommunitySearchResultComponent } from './@feature/community/community-search-result/community-search-result.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { DeleteCommentComponent } from './@feature/comments/delete-comment/delet
     CreateEditFlairComponent,
     DeletePostComponent,
     DeleteCommentComponent,
+    CommunitySearchResultComponent,
   ],
   imports: [
     BrowserModule,

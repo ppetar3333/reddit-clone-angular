@@ -54,6 +54,33 @@
         </p>
       </div>
       <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">PDF File</p>
+        <p class="add-subreddit-post__desc">Choose a PDF file to upload.</p>
+        <label for="file-upload-pdf" class="custom-file-upload">
+          <img
+            class="file-upload__img"
+            src="../../assets/images/cloud-arrow-up-solid.svg"
+            alt="Upload PDF Svg File"
+          />
+          Upload PDF
+        </label>
+        <p class="form__error-text" *ngIf="pdfFileErrorMessage">
+          {{ pdfFileErrorMessage }}
+        </p>
+        <input
+          id="file-upload-pdf"
+          class="add-subreddit-post__data-name"
+          type="file"
+          placeholder="PDF File"
+          accept="application/pdf"
+          #filePdf
+          (change)="uploadPdf(filePdf.files)"
+        />
+        <div class="add-subreddit-post__pdf-wrapper">
+          <p class="add-subreddit-post__pdf-name">{{ pdfName }}</p>
+        </div>
+      </div>
+      <div class="add-subreddit-post__data-wrapper">
         <p class="add-subreddit-post__data-title">Description</p>
         <p class="add-subreddit-post__desc">
           Community description helps users to get what they are searching for.

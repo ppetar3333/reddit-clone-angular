@@ -32,7 +32,7 @@
             <span class="post-card__community"
               ><a
                 class="post-card__community-link btn--blue"
-                [routerLink]="['/community', post.subreddit.subredditID]"
+                [routerLink]="['/community', post.subreddit.subredditID ? post.subreddit.subredditID : post.subreddit.id]"
                 >{{ post.subreddit.name }}</a
               ></span
             >

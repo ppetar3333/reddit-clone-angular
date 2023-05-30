@@ -14,7 +14,7 @@ export class PostService {
   constructor(private httpClient: HttpClient) {}
 
   public getPosts(): Observable<Post[]> {
-    return this.httpClient.get<Post[]>(this.APIurl).pipe(
+    return this.httpClient.get<Post[]>(`${this.APIurl}/all`).pipe(
       catchError((err) => {
         console.error(err);
         throw err;
@@ -58,6 +58,51 @@ export class PostService {
     );
   }
 
+  public searchByDesc(desc: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.APIurl}/text`, { text: desc }).pipe(
+      catchError((err) => {
+        console.error(err);
+        throw err;
+      })
+    );
+  }
+
+  public searchByTitle(title: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.APIurl}/title`, { title: title }).pipe(
+      catchError((err) => {
+        console.error(err);
+        throw err;
+      })
+    );
+  }
+
+  public searchByPdf(textPdf: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.APIurl}/text-pdf`, { textPdf: textPdf }).pipe(
+      catchError((err) => {
+        console.error(err);
+        throw err;
+      })
+    );
+  }
+
+  public searchByKarma(bottom: number, top: number): Observable<any> {
+    let queryParams = new HttpParams();
+    if (bottom != null) {
+      queryParams = queryParams.set('bottom', bottom);
+    }
+    if (top != null) {
+      queryParams = queryParams.set('top', top);
+    }
+
+    return this.httpClient.get<any>(`${this.APIurl}/karma`, {params: queryParams}).pipe(
+      catchError((err) => {
+        console.error(err);
+        throw err;
+      })
+    );
+  }
+  
+
   public updatePostByID(post: Post, id: number): Observable<any> {
     return this.httpClient.put(`${this.APIurl}/update/${id}`, 
     { 
@@ -76,7 +121,6 @@ export class PostService {
 
   public savePost(post: AddPost, file: any): Observable<string> {
     const formData: FormData = new FormData();
-  
     formData.append('files', file);
     formData.append('title', post.title);
     formData.append('text', post.description);

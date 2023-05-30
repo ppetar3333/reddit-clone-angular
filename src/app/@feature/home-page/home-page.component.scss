@@ -13,3 +13,43 @@
   max-width: 800px;
   margin-top: 100px;
 }
+
+.full-width {
+  width: 100% !important;
+}
+
+.home__search-btn {
+  padding: 6px 20px;
+  border-radius: 5px;
+  display: flex;
+  margin: 5px 10px;
+  border: 1px solid #0080ff;
+  background: $blue;
+  color: $white;
+  font-weight: bold;
+  transition: all 0.4s ease;
+}
+
+.home__search-actions {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.karma__wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.half-width {
+  width: 48% !important;
+}
+
+.search__checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

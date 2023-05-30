@@ -18,7 +18,7 @@ export class CommunityPageComponent implements OnInit {
   public posts: Array<Post> = [];
   public id: any;
   public subredditAdmin: boolean = false;
-  public currentSubreddit!: Subreddit;
+  public currentSubreddit!: any;
   public subredditFlairs: string[] = [];
   public retrievedImage: any;
   public base64Data: any;
@@ -39,10 +39,18 @@ export class CommunityPageComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.getPosts();
+    this.id = this.router.snapshot.params;
+    this.getSubredditById();
     this.isLoggedInAmin();
     this.isLoggedInModerator();
     this.getFlairsBySubreddit();
+  }
+
+  public getSubredditById(): void {
+    this.subredditService.getSubredditByID(this.id.subredditID).subscribe((resp) => {
+      this.currentSubreddit = resp;
+      this.getPosts();
+    })
   }
 
   public handleSelectedOptionPost(event: string): void {
@@ -50,12 +58,10 @@ export class CommunityPageComponent implements OnInit {
   }
 
   private getPosts(): void {
-    this.id = this.router.snapshot.params;
     this.postService
       .getPostsBySubredditID(this.id.subredditID)
       .subscribe((response) => {
         this.posts = response;
-        this.currentSubreddit = response[0].subreddit;
         this.posts.forEach((element) => {
           if (element.imagePath) {
             this.postService

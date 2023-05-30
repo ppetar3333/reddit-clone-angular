@@ -19,10 +19,17 @@ import { NavComponent } from '../../../@ui/nav/nav.component';
 export class CreateCommunity implements OnInit {
   user!: User;
   subredditForm: any;
-  subreddit!: Subreddit;
+  subreddit!: any;
   name: string = '';
   description: string = '';
   nav!: NavComponent;
+  pdfFileError: any;
+  pdfFileErrorMessage: string = '';
+  pdfURL: any;
+  pdfPath: any;
+  pdfName: string = '';
+  formDataPDF: any;
+  pdf: any;
 
   constructor(
     private authService: AuthService,
@@ -68,10 +75,29 @@ export class CreateCommunity implements OnInit {
     });
   }
 
+  public uploadPdf(files: any): void {
+    if (files[0].size > 2062954) {
+      this.pdfFileErrorMessage = 'File is too big.';
+    } else {
+      this.pdfFileErrorMessage = '';
+      this.pdfName = files[0].name;
+      this.pdf = files[0];
+      var reader = new FileReader();
+      this.pdfPath = files;
+      this.formDataPDF = new FormData();
+      this.formDataPDF.append('pdfFile', files[0]);
+      reader.readAsDataURL(files[0]);
+      reader.onload = (_event) => {
+        this.pdfURL = reader.result;
+      };
+    }
+  }
+
   public saveData(): void {
     if (!this.validations.ok) {
       this.getSubredditData();
-      this.subredditService.saveSubreddit(this.subreddit).subscribe({
+      const userId: any = this.subreddit.moderators[0].userID;
+      this.subredditService.saveSubreddit(this.subreddit, this.pdf, userId).subscribe({
         next: () => this.redirectUser(),
         error: () => console.log('error-subreddit'),
         complete: () => console.info('complete-subreddit'),

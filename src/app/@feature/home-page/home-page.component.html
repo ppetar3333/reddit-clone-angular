@@ -8,5 +8,124 @@
     (selectedOptionForPost)="handleSelectedOptionPost($event)"
     [sortPostsDropdown]="true">
   </app-sort-post-comment>
-  <app-post-card [posts]="posts"></app-post-card>
+  <div class="home__search-wrapper">
+    <div class="home__search-container">
+      <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">Choose Searching Type Of Posts</p>
+        <div class="search__checkbox-wrapper">
+          <p class="add-subreddit-post__desc">If you want to search by two fields, please set this checkbox as checked.</p>
+          <input type="checkbox" (change)="checkboxChanged()"/>
+        </div>
+        <div class="select-wrapper full-width">
+          <select class="add-subreddit-post__data-name" (change)="getSearchType($event)">
+            <option>Select Searching Type</option>
+            <option *ngFor="let value of searchTypes" [ngValue]="value">{{ value }}</option>
+          </select>
+        </div>
+        <div *ngIf="isChecked" class="select-wrapper full-width">
+          <select class="add-subreddit-post__data-name" (change)="getSearchTypeSecond($event)">
+            <option>Select Searching Type</option>
+            <option *ngFor="let value of searchTypes" [ngValue]="value">{{ value }}</option>
+          </select>
+        </div>
+        <div *ngIf="isChecked" class="select-wrapper full-width">
+          <select class="add-subreddit-post__data-name" (change)="getAndOr($event)">
+            <option *ngFor="let value of andOrValues" [ngValue]="value">{{ value }}</option>
+          </select>
+        </div>
+      </div>
+      <ng-container *ngIf="selectedSearchType !== '' && selectedSearchType !== 'Select Searching Type'">
+        <div class="add-subreddit-post__data-wrapper full-width" *ngIf="selectedSearchType !== 'Karma'">
+          <p class="add-subreddit-post__data-title">{{ selectedSearchType }}</p>
+          <input class="add-subreddit-post__data-name full-width" type="text" required placeholder="{{selectedSearchType}}" (keyup)="getValue($event)"/>
+        </div>
+        <div class="add-subreddit-post__data-wrapper full-width" *ngIf="selectedSearchType == 'Karma'">
+          <p class="add-subreddit-post__data-title">{{ selectedSearchType }}</p>
+          <div class="karma__wrapper">
+            <input class="add-subreddit-post__data-name half-width" type="number" required placeholder="Enter bottom value" (keyup)="getBottomKarma($event)"/>
+            <input class="add-subreddit-post__data-name half-width" type="number" required placeholder="Enter top value" (keyup)="getTopKarma($event)"/>
+          </div>
+        </div>
+        <ng-container *ngIf="selectedSearchTypeSecond !== '' && selectedSearchTypeSecond !== 'Select Searching Type' && isChecked">
+          <div class="add-subreddit-post__data-wrapper full-width" *ngIf="selectedSearchTypeSecond !== 'Karma'">
+            <p class="add-subreddit-post__data-title">{{ selectedSearchTypeSecond }}</p>
+            <input class="add-subreddit-post__data-name full-width" type="text" required placeholder="{{selectedSearchTypeSecond}}" (keyup)="getValueSecond($event)"/>
+          </div>
+          <div class="add-subreddit-post__data-wrapper full-width" *ngIf="selectedSearchTypeSecond == 'Karma'">
+            <p class="add-subreddit-post__data-title">{{ selectedSearchTypeSecond }}</p>
+            <div class="karma__wrapper">
+              <input class="add-subreddit-post__data-name half-width" type="number" required placeholder="Enter bottom value" (keyup)="getBottomKarma($event)"/>
+              <input class="add-subreddit-post__data-name half-width" type="number" required placeholder="Enter top value" (keyup)="getTopKarma($event)"/>
+            </div>
+          </div>
+        </ng-container>
+        <div class="home__search-actions">
+          <button class="home__search-btn" type="button" (click)="search()">Search</button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="home__search-wrapper">
+    <div class="home__search-container">
+      <div class="add-subreddit-post__data-wrapper">
+        <p class="add-subreddit-post__data-title">Choose Searching Type Of Subreddits</p>
+        <div class="search__checkbox-wrapper">
+          <p class="add-subreddit-post__desc">If you want to search by two fields, please set this checkbox as checked.</p>
+          <input type="checkbox" (change)="checkboxChangedSubreddit()"/>
+        </div>
+        <div class="select-wrapper full-width">
+          <select class="add-subreddit-post__data-name" (change)="getSearchTypeSubreddit($event)">
+            <option>Select Searching Type</option>
+            <option *ngFor="let value of searchTypesSubreddit" [ngValue]="value">{{ value }}</option>
+          </select>
+        </div>
+        <div *ngIf="isCheckedSubreddit" class="select-wrapper full-width">
+          <select class="add-subreddit-post__data-name" (change)="getSearchTypeSecondSubreddit($event)">
+            <option>Select Searching Type</option>
+            <option *ngFor="let value of searchTypesSubreddit" [ngValue]="value">{{ value }}</option>
+          </select>
+        </div>
+        <div *ngIf="isCheckedSubreddit" class="select-wrapper full-width">
+          <select class="add-subreddit-post__data-name" (change)="getAndOrSubreddit($event)">
+            <option *ngFor="let value of andOrValues" [ngValue]="value">{{ value }}</option>
+          </select>
+        </div>
+      </div>
+      <ng-container *ngIf="selectedSearchTypeSubreddit !== '' && selectedSearchTypeSubreddit !== 'Select Searching Type'">
+        <div class="add-subreddit-post__data-wrapper full-width" *ngIf="selectedSearchTypeSubreddit !== 'Posts Count'">
+          <p class="add-subreddit-post__data-title">{{ selectedSearchTypeSubreddit }}</p>
+          <input class="add-subreddit-post__data-name full-width" type="text" required placeholder="{{selectedSearchTypeSubreddit}}" (keyup)="getValueSubreddit($event)"/>
+        </div>
+        <div class="add-subreddit-post__data-wrapper full-width" *ngIf="selectedSearchTypeSubreddit == 'Posts Count'">
+          <p class="add-subreddit-post__data-title">{{ selectedSearchTypeSubreddit }}</p>
+          <div class="karma__wrapper">
+            <input class="add-subreddit-post__data-name half-width" type="number" required placeholder="Enter bottom value" (keyup)="getBottomPostsSubreddit($event)"/>
+            <input class="add-subreddit-post__data-name half-width" type="number" required placeholder="Enter top value" (keyup)="getTopPostsSubreddit($event)"/>
+          </div>
+        </div>
+        <ng-container *ngIf="selectedSearchTypeSecondSubreddit !== '' && selectedSearchTypeSecondSubreddit !== 'Select Searching Type' && isCheckedSubreddit">
+          <div class="add-subreddit-post__data-wrapper full-width" *ngIf="selectedSearchTypeSecondSubreddit !== 'Posts Count'">
+            <p class="add-subreddit-post__data-title">{{ selectedSearchTypeSecondSubreddit }}</p>
+            <input class="add-subreddit-post__data-name full-width" type="text" required placeholder="{{selectedSearchTypeSecondSubreddit}}" (keyup)="getValueSecondSubreddit($event)"/>
+          </div>
+          <div class="add-subreddit-post__data-wrapper full-width" *ngIf="selectedSearchTypeSecondSubreddit == 'Posts Count'">
+            <p class="add-subreddit-post__data-title">{{ selectedSearchTypeSecondSubreddit }}</p>
+            <div class="karma__wrapper">
+              <input class="add-subreddit-post__data-name half-width" type="number" required placeholder="Enter bottom value" (keyup)="getBottomPostsSubreddit($event)"/>
+              <input class="add-subreddit-post__data-name half-width" type="number" required placeholder="Enter top value" (keyup)="getTopPostsSubreddit($event)"/>
+            </div>
+          </div>
+        </ng-container>
+        <div class="home__search-actions">
+          <button class="home__search-btn" type="button" (click)="searchSubreddit()">Search</button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <ng-container *ngIf="showSubreddits">
+    <app-community-search-result [subredditsList]="subredditsList"></app-community-search-result>
+  </ng-container>
+  <ng-container *ngIf="!showSubreddits">
+    <app-post-card [posts]="posts"></app-post-card>
+  </ng-container>
 </section>

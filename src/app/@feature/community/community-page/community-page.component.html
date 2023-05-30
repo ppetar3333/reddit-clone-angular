@@ -5,9 +5,16 @@
       <span class="subreddit-name">{{ currentSubreddit?.name }}</span>
       Subreddit
     </p>
-    <p class="subreddit-desc" *ngIf="!editMode">
-      {{ currentSubreddit?.description }}
-    </p>
+    <ng-container *ngIf="currentSubreddit?.textFromPdf">
+      <span class="post-card__desc">
+        <p *ngFor="let line of currentSubreddit?.textFromPdf.split('\n')">{{ line }}</p>
+      </span>
+    </ng-container>
+    <ng-container *ngIf="!currentSubreddit?.textFromPdf">
+      <p class="subreddit-desc" *ngIf="!editMode">
+        {{ currentSubreddit?.description }}
+      </p>
+    </ng-container>
     <textarea class="post-card__desc-edit subreddit-edit-desc" #editedDesc (keyup)="getChangedDesc(editedDesc)" *ngIf="editMode" [value]="currentSubreddit.description"></textarea>
     <div class="subreddit__suspend-wrapper" *ngIf="subredditAdmin">
       <button class="subreddit__susprend-btn btn--blue" type="button" (click)="suspendCommunity()">

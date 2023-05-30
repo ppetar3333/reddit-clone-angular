@@ -1,0 +1,56 @@
+<section class="subreddit container" *ngFor="let currentSubreddit of subredditsList">
+    <div class="subreddit__wrapper border-bottom">
+      <p class="subreddit-text">
+        This Is <span class="subreddit-name">{{ currentSubreddit?.name }}</span> Subreddit
+      </p>
+      <ng-container *ngIf="currentSubreddit.textFromPdf">
+        <span class="post-card__desc">
+          <p *ngFor="let line of currentSubreddit.textFromPdf.split('\n')">{{ line }}</p>
+        </span>
+      </ng-container>
+      <ng-container *ngIf="!currentSubreddit.textFromPdf">
+        <p class="subreddit-desc">
+          {{ currentSubreddit?.description }}
+        </p>
+      </ng-container>
+      <div class="subreddit-details__wrapper">
+        <div class="subreddit-details">
+          <h4 class="subreddit-details-title">Rules</h4>
+          <div *ngIf="currentSubreddit">
+            <p
+            *ngFor="let data of currentSubreddit?.rules; let i = index"
+            class="subreddit-details-data"
+          >
+            <b>{{ i + 1 + ". " }}</b> {{ data }}
+          </p>
+          </div>
+        </div>
+        <div class="subreddit-details">
+          <h4 class="subreddit-details-title">Flairs</h4>
+          <div *ngIf="currentSubreddit.flairs.length > 0">
+            <p
+            *ngFor="let data of currentSubreddit.flairs; let i = index"
+            class="subreddit-details-data"
+          >
+            <b>{{ i + 1 + ". " }}</b> {{ data }}
+          </p>
+          </div>
+          <div *ngIf="currentSubreddit.flairs.length === 0">
+            <p class="subreddit-details-data">
+              No Flairs Provided
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="subreddit__actions-center">
+        <span class="post-card__community"
+          ><a
+            class="post-card__community-link btn--blue"
+            [routerLink]="['/community', currentSubreddit.subredditID ? currentSubreddit.subredditID : currentSubreddit.id]"
+            >{{ currentSubreddit.name }}</a
+          ></span
+        >
+      </div>
+    </div>
+</section>
+  
