@@ -175,7 +175,6 @@ export class HomePageComponent implements OnInit {
     } else if (this.selectedSearchTypeSubreddit === 'Name') {
       this.subredditService.searchByName(this.serachValueSubreddit).subscribe((resp) => {
         this.subredditsList = resp;
-        console.log(this.subredditsList)
         this.populateSubreddits();
       });
     } else if (this.selectedSearchTypeSubreddit === 'Text From Pdf') {
