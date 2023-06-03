@@ -76,20 +76,30 @@ export class CreateCommunity implements OnInit {
   }
 
   public uploadPdf(files: any): void {
-    if (files[0].size > 2062954) {
-      this.pdfFileErrorMessage = 'File is too big.';
+    if (files && files.length > 0) {
+      if (files[0].size > 2062954) {
+        this.pdfFileErrorMessage = 'File is too big.';
+      } else {
+        this.pdfFileErrorMessage = '';
+        this.pdfName = files[0].name;
+        this.pdf = files[0];
+        var reader = new FileReader();
+        this.pdfPath = files;
+        this.formDataPDF = new FormData();
+        this.formDataPDF.append('pdfFile', files[0]);
+        reader.readAsDataURL(files[0]);
+        reader.onload = (_event) => {
+          this.pdfURL = reader.result;
+        };
+      }
     } else {
       this.pdfFileErrorMessage = '';
-      this.pdfName = files[0].name;
-      this.pdf = files[0];
-      var reader = new FileReader();
-      this.pdfPath = files;
+      this.pdfName = 'empty.pdf';
+      this.pdf = new Blob([], { type: 'application/pdf' });
+      this.pdfPath = null;
       this.formDataPDF = new FormData();
-      this.formDataPDF.append('pdfFile', files[0]);
-      reader.readAsDataURL(files[0]);
-      reader.onload = (_event) => {
-        this.pdfURL = reader.result;
-      };
+      this.formDataPDF.append('pdfFile', this.pdf, 'empty.pdf');
+      this.pdfURL = ''; // Clear the PDF URL or set it to a default empty PDF URL
     }
   }
 

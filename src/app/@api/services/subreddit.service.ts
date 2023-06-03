@@ -54,11 +54,7 @@ export class SubredditService {
 
   saveSubreddit(subreddit: any, file: File, userId: number) {
     const formData: FormData = new FormData();
-    if (file) {
-      formData.append('files', file);
-    } else {
-      formData.append('files', new Blob([]), '');
-    }
+    formData.append('files', file);
     formData.append('name', subreddit.name);
     formData.append('description', subreddit.description);
   

@@ -121,13 +121,7 @@ export class PostService {
 
   public savePost(post: AddPost, file: any): Observable<string> {
     const formData: FormData = new FormData();
-    if (file) {
-      formData.append('files', file);
-    } else {
-      const emptyPdfBlob = new Blob([new Uint8Array([])], { type: 'application/pdf' });
-      const emptyPdfFile = new File([emptyPdfBlob], 'empty.pdf');
-      formData.append('files', emptyPdfFile);
-    }
+    formData.append('files', file);
     formData.append('title', post.title);
     formData.append('text', post.description);
     formData.append('imagePath', post.image);
