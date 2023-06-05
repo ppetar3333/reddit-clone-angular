@@ -3,6 +3,7 @@
       <p class="subreddit-text">
         This Is <span class="subreddit-name">{{ currentSubreddit?.name }}</span> Subreddit
       </p>
+      <p class="">Posts Count: {{ currentSubreddit.postsCount }}</p>
       <ng-container *ngIf="currentSubreddit.textFromPdf">
         <span class="post-card__desc">
           <p *ngFor="let line of currentSubreddit.textFromPdf.split('\n')">{{ line }}</p>
